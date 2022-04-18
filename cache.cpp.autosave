@@ -1,0 +1,120 @@
+#include "cache.h"
+
+
+Cache::Cache(unsigned int numL, unsigned int bSize, writePolicy policy)
+{
+    p = policy;
+    numLayers = numL;
+    blockSize = bSize;
+    
+}
+
+void Cache::setLayerAssociativity(std::vector<int> sets)
+{
+    layerAssociativities = sets;
+    associativitySet = true;
+}
+
+void Cache::setLayerLatency(std::vector<int> times)
+{
+    layerLatencies = times;
+    latencySet = true
+}
+
+void Cache::setLayerSize(std::vector<int> sizes)
+{
+    layerSizes = sizes;
+}
+
+//format: "operation address arrivingTime"
+void Cache::parseInput(std::ifstream &input)
+{
+    while(true)
+    {
+        std::string line, read_write, address = "", time = "";
+        if(!std::getline(input, line))
+        {
+            break;
+        }
+        unsigned int i = 0;
+        
+        read_write = line[i];
+        i+=2;
+        while(line[i] != ' ')
+        {
+            address = address + line[i];
+            i++;
+        }
+        i++;
+        while(i != line.length())
+        {
+            time = time + line[i];
+            i++;
+        }
+        int t, a;
+        t = stoi(time);
+        a = stoi(address);
+        
+        if(read_write == "r")
+        {
+            //do something
+            
+        }
+        else if(read_write == "w")
+        {
+            //do something
+            
+        }
+        else
+        {
+            //something is wrong
+        }
+        //now we have the read/write, the address, and the time all separated
+        
+        
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

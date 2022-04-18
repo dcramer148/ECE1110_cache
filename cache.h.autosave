@@ -1,0 +1,86 @@
+#ifndef CACHE_H
+#define CACHE_H
+#include <iostream>
+#include <fstream>
+#include <vector>
+//#include "cachelayer.h"
+
+enum writePolicy { writeBack = 0, writeThrough = 1};
+
+struct block
+{
+    bool valid = 0;
+    bool dirty = 0;
+    int tag;
+};
+
+struct set
+{
+    std::vector<block> blocks;
+};
+
+struct layer
+{
+    std::vector<set> sets;
+};
+
+class Cache
+{
+    
+public:
+    Cache(unsigned int numL, unsigned int blockSize, writePolicy policy);
+    
+    void setLayerSize(std::vector<int> sizes);
+    void setLayerLatency(std::vector<int> times);
+    void setLayerAssociativity(std::vector<int> sets);
+    
+    
+    
+    void parseInput(std::ifstream& input);
+    
+    
+private:
+    
+    void initializeCache();
+    bool read(int address, int arriving_time);
+    bool write(int address, int arriving_time);
+    
+    bool sizeSet, latencySet, associativitySet;
+    
+    unsigned int numLayers, blockSize;
+    writePolicy p;
+    std::vector<int> layerSizes;
+    std::vector<int> layerLatencies;
+    std::vector<int> layerAssociativities;
+    
+    std::vector<int> hits;
+    std::vector<
+    
+    std::vector<layer> layers;
+    
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif // CACHE_H
